@@ -1,22 +1,13 @@
-import os
-import zipfile
+from pathlib import Path
 
 class FilesLoader:
     def __init__(self):
-        self.input_folder = r"C:\Users\HOME\inimical_podcasts.zip"
+        self.input_folder = Path(r"C:\Users\HOME\inimical_podcasts")
 
     def load_files(self):
-        with zipfile.ZipFile(self.input_folder) as z:
-            for filename in z.namelist():
-                filepath = os.path.join(self.input_folder, filename)
-                if not os.path.isdir(filename):
-                    if filename.lower().endswith(".wav"):
-                        print(filepath)
-                else:
-                    for filename2 in os.listdir(filepath):
-                        if filename2.lower().endswith(".wav"):
-                            filepath = os.path.join(self.input_folder, filename2)
-                            print(filepath)
+        files = self.input_folder.rglob('*.wav')
+        for f in files:
+            print(f)
 
 
 a = FilesLoader()
