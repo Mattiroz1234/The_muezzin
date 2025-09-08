@@ -10,12 +10,12 @@ class MetadataCreator:
             'Path': {
                 'full path': str(path)
             },
-            'Technical details': {
+            'Permanent details': {
                 'file name': os.path.basename(str(path)),
-                'size (KB)': self.size_format(stats.st_size)
-            },
-            'Time details': {
+                'size (KB)': self.size_format(stats.st_size),
                 'Creation Date': str(self.time_convert(stats.st_ctime)),
+            },
+            'Temporary details': {
                 'Modified Date': str(self.time_convert(stats.st_mtime)),
                 'Last Access Date': str(self.time_convert(stats.st_atime))
             }

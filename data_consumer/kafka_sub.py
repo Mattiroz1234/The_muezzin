@@ -2,25 +2,27 @@ from kafka import KafkaConsumer
 import json
 import os
 from dotenv import load_dotenv
+from consumer_manager import ConsumerManager
 
 load_dotenv()
 
-mongo_url = os.getenv('MONGODB_URL')
+class Subscriber:
+    def __init__(self):
+        self.mongo_url = os.getenv('MONGODB_URL')
+        self.consumer = KafkaConsumer(
+            'inimical_podcasts',
+            bootstrap_servers=self.mongo_url,
+            value_deserializer=lambda m: json.loads(m.decode('utf-8')),
+            group_id='podcasts',
+            auto_offset_reset = 'earliest'
+        )
 
-consumer = KafkaConsumer(
-    'inimical_podcasts',
-    bootstrap_servers=mongo_url,
-    value_deserializer=lambda m: json.loads(m.decode('utf-8')),
-    group_id='podcasts',
-    auto_offset_reset = 'earliest'
-)
 
+    def get_inimical_podcasts(self):
+        for file in self.consumer:
+            receiver = ConsumerManager(file.value['file_info'])
+            receiver.main_func()
 
-def get_inimical_podcasts():
-    for file in consumer:
-        print(file)
-
-get_inimical_podcasts()
 
 
 

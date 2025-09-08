@@ -17,7 +17,7 @@ class Publisher:
 
     def publish_file_metadata(self, dic):
         self.producer.send('inimical_podcasts', {'file_info': dic})
-        print(f"{dic['Technical details']['file name']} sent successfully")
+        print(f"{dic['Permanent details']['file name']} sent successfully")
 
         self.producer.flush()
 
