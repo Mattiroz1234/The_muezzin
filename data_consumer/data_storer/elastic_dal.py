@@ -14,5 +14,5 @@ class ElasticSearchDAL:
         if not self.es.indices.exists(index=self.index_name):
             self.es.indices.create(index=self.index_name)
 
-            self.es.index(index=self.index_name, id=unique_id, body=document)
-            print("document indexed.")
+        self.es.index(index=self.index_name, id=unique_id, body=document)
+        print("document indexed.")

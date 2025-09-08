@@ -1,4 +1,4 @@
 from kafka_consumer.kafka_sub import Subscriber
 
-s = Subscriber()
-s.get_inimical_podcasts()
+data_subscriber = Subscriber()
+data_subscriber.get_inimical_podcasts()
