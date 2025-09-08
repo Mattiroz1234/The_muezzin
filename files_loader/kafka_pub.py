@@ -8,9 +8,9 @@ load_dotenv()
 class Publisher:
 
     def __init__(self):
-        self.mongo_url = os.getenv('MONGODB_URL')
+        self.kafka_url = os.getenv('KAFKA_URL')
         self.producer = KafkaProducer(
-            bootstrap_servers=self.mongo_url,
+            bootstrap_servers=self.kafka_url,
             value_serializer=lambda v: json.dumps(v).encode('utf-8')
         )
 
@@ -21,5 +21,3 @@ class Publisher:
 
         self.producer.flush()
 
-a = Publisher()
-print(a.mongo_url)

@@ -8,10 +8,10 @@ load_dotenv()
 
 class Subscriber:
     def __init__(self):
-        self.mongo_url = os.getenv('MONGODB_URL')
+        self.kafka_url = os.getenv('KAFKA_URL')
         self.consumer = KafkaConsumer(
             'inimical_podcasts',
-            bootstrap_servers=self.mongo_url,
+            bootstrap_servers=self.kafka_url,
             value_deserializer=lambda m: json.loads(m.decode('utf-8')),
             group_id='podcasts',
             auto_offset_reset = 'earliest'

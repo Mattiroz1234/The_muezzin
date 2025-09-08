@@ -4,3 +4,6 @@
 *__pycache__
 files_loader/.env
 data_consumer/.env
+data_consumer/data_storer/.env
+data_consumer/data_storer/download.wav
+data_consumer/tester.py
