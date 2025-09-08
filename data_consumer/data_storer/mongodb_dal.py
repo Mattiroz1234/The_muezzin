@@ -9,7 +9,7 @@ class MongodbDAL:
     def __init__(self):
         self.mongodb_url = os.getenv('MONGODB_URL')
         self.client = MongoClient(self.mongodb_url)
-        self.db = self.client['test_db']
+        self.db = self.client[os.getenv('MONGODB_DB_NAME')]
 
     def save_file_to_mongodb(self, path, file_name, unique_id):
         fs = gridfs.GridFS(self.db)

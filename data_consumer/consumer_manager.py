@@ -6,7 +6,7 @@ class ConsumerManager:
     def __init__(self, file):
         self.file = file
         self.id_creator = IDCreator
-        self.save_to_elastic = ElasticSearchDAL('metadata_of_inimical_podcasts')
+        self.save_to_elastic = ElasticSearchDAL()
         self.save_to_mongo = MongodbDAL()
         self.unique_id = None
 

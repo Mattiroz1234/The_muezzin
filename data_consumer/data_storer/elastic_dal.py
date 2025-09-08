@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class ElasticSearchDAL:
-    def __init__(self, index):
+    def __init__(self):
         self.elastic_url = os.getenv('ELASTIC_URL')
         self.es = Elasticsearch(self.elastic_url)
-        self.index_name = index
+        self.index_name = os.getenv('ELASTIC_INDEX_FOR_FILES')
 
     def save_file_to_elastic(self, document, unique_id):
         if not self.es.indices.exists(index=self.index_name):
