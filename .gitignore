@@ -1,3 +1,5 @@
 .idea
 .venv
 .git
+files_loader/.env
+data_consumer/.env

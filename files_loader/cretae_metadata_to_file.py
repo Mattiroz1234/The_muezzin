@@ -8,16 +8,16 @@ class MetadataCreator:
 
         attrs = {
             'Path': {
-                'full path': path
+                'full path': str(path)
             },
             'Technical details': {
                 'file name': os.path.basename(str(path)),
                 'size (KB)': self.size_format(stats.st_size)
             },
             'Time details': {
-                'Creation Date': self.time_convert(stats.st_ctime),
-                'Modified Date': self.time_convert(stats.st_mtime),
-                'Last Access Date': self.time_convert(stats.st_atime)
+                'Creation Date': str(self.time_convert(stats.st_ctime)),
+                'Modified Date': str(self.time_convert(stats.st_mtime)),
+                'Last Access Date': str(self.time_convert(stats.st_atime))
             }
         }
 
