@@ -2,7 +2,7 @@ from kafka import KafkaConsumer
 import json
 import os
 from dotenv import load_dotenv
-from consumer_manager import ConsumerManager
+from data_consumer.consumer_manager import ConsumerManager
 
 load_dotenv()
 

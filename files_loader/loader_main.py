@@ -9,8 +9,8 @@ def preprocessing():
 
     files_list = loader.load_files()
 
-    for f in files_list:
-        metadata = metadata_creator.create_metadata(f)
+    for file in files_list:
+        metadata = metadata_creator.create_metadata(file)
         publisher.publish_file_metadata(metadata)
 
 preprocessing()

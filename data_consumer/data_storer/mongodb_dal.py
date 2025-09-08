@@ -20,6 +20,3 @@ class MongodbDAL:
             file_id = fs.put(file_data, filename=file_name, description='Sample audio file', id=unique_id)
 
         print(f"File uploaded with file_id: {file_id}")
-
-# m = MongodbDAL()
-# m.save_file_to_mongodb('download.wav', "aaa", 65434567876543)
