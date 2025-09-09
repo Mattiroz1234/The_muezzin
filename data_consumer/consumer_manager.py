@@ -1,6 +1,6 @@
 from data_consumer.create_id.creates_unique_id import IDCreator
-from data_storer.elastic_dal import ElasticSearchDAL
-from data_storer.mongodb_dal import MongodbDAL
+from data_saver.elastic_dal import ElasticSearchDAL
+from data_saver.mongodb_dal import MongodbDAL
 
 class ConsumerManager:
     def __init__(self, file):

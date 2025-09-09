@@ -6,7 +6,7 @@
 
 files_loader/.env
 data_consumer/kafka_consumer/.env
-data_consumer/data_storer/.env
+data_consumer/data_saver/.env
 logger_dir/.env
 
 data_consumer/tester.py
