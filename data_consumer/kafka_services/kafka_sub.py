@@ -24,12 +24,12 @@ class Subscriber:
     def get_inimical_podcasts(self):
         try:
             for file in self.consumer:
-                logger.info('kafka consumer get a file')
+                logger.info('kafka_services consumer get a file')
                 receiver = ConsumerManager(file.value['file_info'])
                 receiver.main_func()
 
         except errors.KafkaError as error:
-            logger.error(f"error: {error} - problem in kafka")
+            logger.error(f"error: {error} - problem in kafka_services")
 
 
 

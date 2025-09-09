@@ -11,6 +11,7 @@ class Transcriber:
     def transcription_of_file(self):
         try:
             text = self.r.recognize_sphinx(self.audio)
+            logger.info('The file transcribed successfully')
             return text
         except sr.UnknownValueError as error:
             logger.error(f"error: {error} - Sphinx could not understand audio")
@@ -19,6 +20,7 @@ class Transcriber:
 
         try:
             text = self.r.recognize_google(self.audio)
+            logger.info('The file transcribed successfully')
             return text
         except sr.UnknownValueError as error:
             logger.error(f"error: {error} - Google Speech Recognition could not understand audio")
@@ -26,6 +28,3 @@ class Transcriber:
             logger.error(f"error: {error} - Could not request results from Google Speech Recognition service")
 
 
-
-t = Transcriber("C:\\Users\\HOME\\inimical_podcasts\\download (9).wav")
-print(t.transcription_of_file())
