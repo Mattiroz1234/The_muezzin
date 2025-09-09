@@ -1,7 +1,10 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, errors
 import gridfs
 import os
 from dotenv import load_dotenv
+from logger_dir.logger import Logger
+
+logger = Logger.get_logger()
 
 load_dotenv()
 
@@ -14,9 +17,10 @@ class MongodbDAL:
     def save_file_to_mongodb(self, path, file_name, unique_id):
         fs = gridfs.GridFS(self.db)
 
-        file_path = path
+        try:
+            with open(path, 'rb') as file_data:
+                file_id = fs.put(file_data, filename=file_name, description='Sample audio file', id=unique_id)
 
-        with open(file_path, 'rb') as file_data:
-            file_id = fs.put(file_data, filename=file_name, description='Sample audio file', id=unique_id)
-
-        print(f"File uploaded with file_id: {file_id}")
+            logger.info(f"File uploaded to mongodb with file_id: {file_id}")
+        except errors.WriteError as error:
+            logger.error(f"error: {error} - writing to mongo failed")

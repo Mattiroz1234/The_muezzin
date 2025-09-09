@@ -9,5 +9,4 @@ data_consumer/kafka_consumer/.env
 data_consumer/data_storer/.env
 logger_dir/.env
 
-data_consumer/data_storer/download.wav
 data_consumer/tester.py

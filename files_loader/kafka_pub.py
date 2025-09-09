@@ -1,7 +1,10 @@
 import os
-from kafka import KafkaProducer
+from kafka import KafkaProducer, errors
 import json
 from dotenv import load_dotenv
+from logger_dir.logger import Logger
+
+logger = Logger.get_logger()
 
 load_dotenv()
 
@@ -16,8 +19,13 @@ class Publisher:
 
 
     def publish_file_metadata(self, dic):
-        self.producer.send('inimical_podcasts', {'file_info': dic})
-        print(f"{dic['Permanent details']['file name']} sent successfully")
+        try:
+            self.producer.send('inimical_podcasts', {'file_info': dic})
+            logger.info(f"{dic['Permanent details']['file name']} sent successfully")
 
-        self.producer.flush()
+            self.producer.flush()
+        except errors.NoBrokersAvailable as error:
+            logger.error(f"error: {error} - kafka service is not available")
+        except errors.KafkaError as error:
+            logger.error(f"error: {error} - problem in kafka")
 

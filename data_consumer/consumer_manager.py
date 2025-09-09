@@ -4,28 +4,28 @@ from data_storer.mongodb_dal import MongodbDAL
 
 class ConsumerManager:
     def __init__(self, file):
-        self.file = file
+        self.file_details = file
         self.id_creator = IDCreator
-        self.save_to_elastic = ElasticSearchDAL()
-        self.save_to_mongo = MongodbDAL()
+        self.elastic = ElasticSearchDAL()
+        self.mongo = MongodbDAL()
         self.unique_id = None
 
     def main_func(self):
         self.get_id()
-        self.metadata_saving()
-        self.data_saving()
+        self.save_metadata()
+        self.save_data()
 
     def get_id(self):
-        data_for_id = self.file['Permanent details']
+        data_for_id = self.file_details['Permanent details']
         self.unique_id = self.id_creator.generate_id(data_for_id)
 
-    def metadata_saving(self):
-        self.save_to_elastic.save_file_to_elastic(self.file, self.unique_id)
+    def save_metadata(self):
+        self.elastic.save_file_to_elastic(self.file_details, self.unique_id)
 
-    def data_saving(self):
-        path = self.file['Path']['full path']
-        file_name = self.file['Permanent details']['file name']
-        self.save_to_mongo.save_file_to_mongodb(path, file_name, self.unique_id)
+    def save_data(self):
+        path = self.file_details['Path']['full path']
+        file_name = self.file_details['Permanent details']['file name']
+        self.mongo.save_file_to_mongodb(path, file_name, self.unique_id)
 
 
 

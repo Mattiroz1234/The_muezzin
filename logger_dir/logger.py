@@ -12,7 +12,7 @@ index_name = os.getenv('ELASTIC_INDEX_FOR_LOGS')
 class Logger:
     _logger = None
     @classmethod
-    def get_logger(cls, name="your_logger_name", es_host=elastic_url,
+    def get_logger(cls, name="the muezzin logger", es_host=elastic_url,
         index=index_name, level=logging.DEBUG):
         if cls._logger:
             return cls._logger

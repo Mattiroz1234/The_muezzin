@@ -1,8 +1,11 @@
-from kafka import KafkaConsumer
+from kafka import KafkaConsumer, errors
 import json
 import os
 from dotenv import load_dotenv
 from data_consumer.consumer_manager import ConsumerManager
+from logger_dir.logger import Logger
+
+logger = Logger.get_logger()
 
 load_dotenv()
 
@@ -19,11 +22,14 @@ class Subscriber:
 
 
     def get_inimical_podcasts(self):
-        for file in self.consumer:
-            receiver = ConsumerManager(file.value['file_info'])
-            receiver.main_func()
+        try:
+            for file in self.consumer:
+                logger.info('kafka consumer get a file')
+                receiver = ConsumerManager(file.value['file_info'])
+                receiver.main_func()
 
-
+        except errors.KafkaError as error:
+            logger.error(f"error: {error} - problem in kafka")
 
 
 
