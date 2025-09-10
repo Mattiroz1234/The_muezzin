@@ -23,3 +23,14 @@ class ElasticSearchDAL:
             logger.error(f"error: {error} - elastic is not available")
         except exceptions.TransportError as error:
             logger.error(f"error: {error} - sending to elastic failed")
+
+
+    def update_file_in_dangers(self, document, unique_id):
+        try:
+            self.es.update(index=self.index_name, id=unique_id, doc=document)
+            logger.info(f"document {unique_id} updated successfully to elastic")
+
+        except exceptions.ConnectionError as error:
+            logger.error(f"error: {error} - elastic is not available")
+        except exceptions.TransportError as error:
+            logger.error(f"error: {error} - sending to elastic failed")
