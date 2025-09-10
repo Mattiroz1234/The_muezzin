@@ -9,5 +9,6 @@ data_consumer/kafka_services/.env
 data_consumer/data_saver/.env
 logger_dir/.env
 transcription_of_files/.env
+classified_content/.env
 
 data_consumer/tester.py

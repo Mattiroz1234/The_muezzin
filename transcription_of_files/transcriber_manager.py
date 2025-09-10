@@ -24,7 +24,7 @@ class TranscriberManager:
     def send_to_transcription(self):
         transcriber = Transcriber(self.temp_file_path)
         text = transcriber.transcription_of_file()
-        self.text = {'text': text}
+        self.text = {'text': text, 'words count': len(text.split())}
 
     def delete_file(self):
         file_to_delete = self.temp_file_path
