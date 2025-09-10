@@ -2,6 +2,9 @@ from elastic_dal import ElasticSearchDAL
 from mongo_dal import MongodbDAL
 from transcriber import Transcriber
 import os
+from logger_dir.logger import Logger
+
+logger = Logger.get_logger()
 
 class TranscriberManager:
     def __init__(self, file_id):
@@ -12,9 +15,9 @@ class TranscriberManager:
         self.text = None
 
     def main_func(self):
+        self.delete_file()
         self.get_file_according_id()
         self.send_to_transcription()
-        self.delete_file()
         self.sand_text_to_elastic()
 
 
@@ -27,8 +30,11 @@ class TranscriberManager:
         self.text = {'text': text, 'words count': len(text.split())}
 
     def delete_file(self):
-        file_to_delete = self.temp_file_path
-        os.remove(file_to_delete)
+        try:
+            os.remove(self.temp_file_path)
+            logger.info("file deleted successfully")
+        except FileNotFoundError as error:
+            logger.error("file not found")
 
     def sand_text_to_elastic(self):
         self.elastic.update_file(self.text, self.file_id)
